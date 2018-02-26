@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 import Helmet from 'react-helmet';
-import './index.css';
+import { ThemeProvider } from 'styled-components';
+import GlobalStyles from '../lib/global-styles';
+import theme from '../lib/theme';
 
 const Header = () => (
   <header>
@@ -25,17 +27,14 @@ const Header = () => (
 );
 
 const TemplateWrapper = ({ children }) => (
-  <div>
-    <Helmet
-      title="Gatsby Default Starter"
-      meta={[
-        { name: 'description', content: 'Sample' },
-        { name: 'keywords', content: 'sample, something' },
-      ]}
-    />
-    <Header />
-    {children()}
-  </div>
+  <ThemeProvider theme={theme}>
+    <GlobalStyles>
+      <div>
+        <Header />
+        {children()}
+      </div>
+    </GlobalStyles>
+  </ThemeProvider>
 );
 
 TemplateWrapper.propTypes = {
