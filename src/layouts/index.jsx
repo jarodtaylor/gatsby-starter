@@ -14,12 +14,6 @@ const Header = () => (
       <Link to="/page-2">Page 2</Link>
     </div>
     <div>
-      <Link to="/page-3">Page 3</Link>
-    </div>
-    <div>
-      <Link to="/page-4">Page 4</Link>
-    </div>
-    <div>
       <Link to="/articles">Blog</Link>
     </div>
   </header>
