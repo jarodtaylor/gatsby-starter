@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TransitionContent = ({ transition, children }) => (
-  <div style={transition.style}>
+  <div style={transition && transition.style}>
     {children}
   </div>
 );
