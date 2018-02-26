@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import TransitionContent from '../components/TransitionContent';
 
 const Index = ({ transition }) => (
-  <div style={transition && transition.style}>
+  <TransitionContent {...{ transition }}>
     <h1>Page 4</h1>
     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. </p>
-  </div>
+  </TransitionContent>
 );
 
 export default Index;
