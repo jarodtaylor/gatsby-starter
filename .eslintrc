@@ -1,0 +1,25 @@
+{
+  "extends" : [
+    "airbnb"
+  ],
+  "env"     : {
+    "browser" : true
+  },
+  "rules": {
+    "no-unused-expressions": ["error", { "allowTaggedTemplates": true }],
+    "import/extensions": "off",
+    "jsx-a11y/anchor-is-valid": [ "error", {
+      "components": [ "Link" ],
+      "specialLink": [ "hrefLeft", "hrefRight" ],
+      "aspects": [ "invalidHref", "preferButton" ]
+    }],
+    "generator-star-spacing": 0,
+    "brace-style": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-named-as-default": "off",
+    "import/no-unresolved": "off",
+    "no-prototype-builtins": "off",
+    "no-underscore-dangle": "off",
+    "no-undef": "off",
+  },
+}

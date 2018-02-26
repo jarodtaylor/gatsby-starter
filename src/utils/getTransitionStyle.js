@@ -1,5 +1,5 @@
-const getTransitionStyles = timeout => {
-  return {
+const getTransitionStyles = timeout => (
+  {
     entering: {
       opacity: 0,
     },
@@ -12,9 +12,9 @@ const getTransitionStyles = timeout => {
       opacity: 0,
     },
   }
-}
+);
 
 const getTransitionStyle = ({ timeout, status }) =>
-  getTransitionStyles(timeout)[status]
+  getTransitionStyles(timeout)[status];
 
-export default getTransitionStyle
+export default getTransitionStyle;
