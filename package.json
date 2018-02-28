@@ -17,6 +17,7 @@
     "gatsby-plugin-styled-components": "^2.0.8",
     "gatsby-source-filesystem": "^1.5.24",
     "gatsby-transformer-remark": "^1.7.33",
+    "lodash": "^4.17.5",
     "react-helmet": "^5.2.0",
     "react-transition-group": "^2.2.1",
     "styled-components": "^3.1.6",
