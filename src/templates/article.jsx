@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import TransitionContent from '../components/TransitionContent';
+import Tags from '../components/TagsList';
 /* eslint-disable */
 
 // import '../css/blog-post.css'; // make it pretty!
@@ -12,7 +13,9 @@ export default function Template({
   return (
     <TransitionContent {...{ transition }}>
       <Helmet title={`Your Blog Name - ${post.frontmatter.title}`} />
+      <small>{post.frontmatter.category}</small>
       <h1>{post.frontmatter.title}</h1>
+      <Tags list={post.frontmatter.tags || []} />
       <div
         className="blog-post-content"
         dangerouslySetInnerHTML={{ __html: post.html }}
@@ -29,6 +32,8 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         path
         title
+        tags
+        category
       }
     }
   }
@@ -41,6 +46,7 @@ Template.propTypes = {
         date: PropTypes.string,
         path: PropTypes.string,
         title: PropTypes.string,
+        category: PropTypes.string,
       }),
       html: PropTypes.string,
     }),

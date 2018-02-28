@@ -1,64 +1,68 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-// Utilities
-import kebabCase from 'lodash/kebabcase';
-
-// Components
-import Helmet from 'react-helmet';
 import Link from 'gatsby-link';
+import TransitionContent from '../components/TransitionContent';
 
-const TagsPage = ({
-  data: { allMarkdownRemark: { group }, site: { siteMetadata: { title } } },
-}) => (
-  <div>
-    <Helmet title={title} />
-    <div>
-      <h1>Tags</h1>
+const TagPage = ({ pathContext, data, transition }) => {
+  const { tag } = pathContext;
+  const { edges, totalCount } = data.allMarkdownRemark;
+  const tagHeader = `${totalCount} post${
+    totalCount === 1 ? '' : 's'
+  } tagged with "${tag}"`;
+
+  return (
+    <TransitionContent {...{ transition }}>
+      <h1>{tagHeader}</h1>
       <ul>
-        {group.map(tag => (
-          <li key={tag.fieldValue}>
-            <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
-              {tag.fieldValue} ({tag.totalCount})
-            </Link>
-          </li>
-        ))}
+        {edges.map(({ node }) => {
+          const { path, title } = node.frontmatter;
+          return (
+            <li key={path}>
+              <Link to={path}>{title}</Link>
+            </li>
+          );
+        })}
       </ul>
-    </div>
-  </div>
-);
+    </TransitionContent>
+  );
+};
 
-TagsPage.propTypes = {
+TagPage.propTypes = {
+  pathContext: PropTypes.shape({
+    tag: PropTypes.string.isRequired,
+  }).isRequired,
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
-      group: PropTypes.arrayOf(PropTypes.shape({
-        fieldValue: PropTypes.string.isRequired,
-        totalCount: PropTypes.number.isRequired,
+      totalCount: PropTypes.number.isRequired,
+      edges: PropTypes.arrayOf(PropTypes.shape({
+        node: PropTypes.shape({
+          frontmatter: PropTypes.shape({
+            path: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+          }),
+        }),
       }).isRequired),
-    }),
-    site: PropTypes.shape({
-      siteMetadata: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-      }),
     }),
   }).isRequired,
 };
 
-export default TagsPage;
+export default TagPage;
 
 export const pageQuery = graphql`
-  query TagsQuery {
-    site {
-      siteMetadata {
-        title
-      }
-    }
+  query TagPage($tag: String) {
     allMarkdownRemark(
       limit: 2000
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
-      group(field: frontmatter___tags) {
-        fieldValue
-        totalCount
+      totalCount
+      edges {
+        node {
+          frontmatter {
+            title
+            path
+          }
+        }
       }
     }
   }
