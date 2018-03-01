@@ -44,6 +44,14 @@ TagPage.propTypes = {
       }).isRequired),
     }),
   }).isRequired,
+  transition: PropTypes.shape({
+    status: PropTypes.string,
+    timeout: PropTypes.number,
+    style: PropTypes.shape({
+      opacity: PropTypes.number,
+    }),
+    nextPageResources: PropTypes.object,
+  }).isRequired,
 };
 
 export default TagPage;

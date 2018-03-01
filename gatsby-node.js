@@ -1,5 +1,5 @@
 const path = require('path');
-const _ = require('lodash');
+const { kebabCase, get, uniq, each } = require('lodash');
 
 exports.modifyWebpackConfig = ({ config, stage }) => {
   if (stage === 'develop') {
@@ -37,6 +37,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
             path
             title
             tags
+            category
           }
         }
       }
@@ -60,18 +61,18 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       // Tag pages:
       let tags = [];
       // Iterate through each post, putting all found tags into `tags`
-      _.each(posts, (edge) => {
-        if (_.get(edge, "node.frontmatter.tags")) {
+      each(posts, (edge) => {
+        if (get(edge, "node.frontmatter.tags")) {
           tags = tags.concat(edge.node.frontmatter.tags);
         }
       });
       // Eliminate duplicate tags
-      tags = _.uniq(tags);
+      tags = uniq(tags);
 
       // Make tag pages
       tags.forEach((tag) => {
         createPage({
-          path: `/tags/${_.kebabCase(tag)}/`,
+          path: `/tags/${kebabCase(tag)}/`,
           component: tagTemplate,
           context: {
             tag,

@@ -1,7 +1,7 @@
 ---
-path: "/articles/what-up"
-date: "2017-07-12T17:12:33.962Z"
-title: "My First Gatsby Post"
+path: "/articles/react-static-site"
+date: "2018-03-08"
+title: "Let's build a static site using React"
 tags: ["development", "react", "javascript"]
 category: "Development"
 ---
