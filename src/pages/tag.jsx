@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'gatsby-link';
 import TransitionContent from '../components/TransitionContent';
+import ArticleList from '../components/ArticleList';
 
 const TagPage = ({ pathContext, data, transition }) => {
   const { tag } = pathContext;
-  const { edges, totalCount } = data.allMarkdownRemark;
+  const { edges: posts, totalCount } = data.allMarkdownRemark;
   const tagHeader = `${totalCount} post${
     totalCount === 1 ? '' : 's'
   } tagged with "${tag}"`;
@@ -13,16 +13,7 @@ const TagPage = ({ pathContext, data, transition }) => {
   return (
     <TransitionContent {...{ transition }}>
       <h1>{tagHeader}</h1>
-      <ul>
-        {edges.map(({ node }) => {
-          const { path, title } = node.frontmatter;
-          return (
-            <li key={path}>
-              <Link to={path}>{title}</Link>
-            </li>
-          );
-        })}
-      </ul>
+      <ArticleList {...{ posts }} />
     </TransitionContent>
   );
 };
@@ -59,17 +50,13 @@ export default TagPage;
 export const pageQuery = graphql`
   query TagPage($tag: String) {
     allMarkdownRemark(
-      limit: 2000
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { order: DESC, fields: [frontmatter___date] }
       filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
       totalCount
       edges {
         node {
-          frontmatter {
-            title
-            path
-          }
+          ...ArticleListFragment
         }
       }
     }

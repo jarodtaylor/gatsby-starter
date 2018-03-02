@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import TransitionContent from '../components/TransitionContent';
 import ArticleList from '../components/ArticleList';
 
-// import '../css/index.css'; // add some style if you want!
-
 export default function ArticlesIndex({ data, transition }) {
   const { edges: posts } = data.allMarkdownRemark;
   return (

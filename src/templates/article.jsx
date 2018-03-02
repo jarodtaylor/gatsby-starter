@@ -24,6 +24,20 @@ export default function Template({
   );
 }
 
+Template.propTypes = {
+  data: PropTypes.shape({
+    markdownRemark: PropTypes.shape({
+      frontmatter: PropTypes.shape({
+        date: PropTypes.string,
+        path: PropTypes.string,
+        title: PropTypes.string,
+        category: PropTypes.string,
+      }),
+      html: PropTypes.string,
+    }),
+  }).isRequired,
+};
+
 export const pageQuery = graphql`
   query BlogPostByPath($path: String!) {
     markdownRemark(frontmatter: { path: { eq: $path } }) {
@@ -38,17 +52,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-Template.propTypes = {
-  data: PropTypes.shape({
-    markdownRemark: PropTypes.shape({
-      frontmatter: PropTypes.shape({
-        date: PropTypes.string,
-        path: PropTypes.string,
-        title: PropTypes.string,
-        category: PropTypes.string,
-      }),
-      html: PropTypes.string,
-    }),
-  }).isRequired,
-};
