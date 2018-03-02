@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import './transition-content.css';
 
-const TransitionContent = ({ transition, children }) => {
-  return (
-    <div className="transition-content" style={transition && transition.style}>
-      {children}
-    </div>
-  );
-};
+const TransitionContainer = styled.div`
+  opacity: 0;
+  transform: translate3d(0, 10vh, 0);
+  transition: all 600ms ease-in-out;
+`;
+
+const TransitionContent = ({ transition, children }) => (
+  <TransitionContainer style={transition && transition.style}>
+    {children}
+  </TransitionContainer>
+);
 
 TransitionContent.propTypes = {
   transition: PropTypes.shape({
