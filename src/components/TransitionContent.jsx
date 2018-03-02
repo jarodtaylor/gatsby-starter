@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import './transition-content.css';
 
 const TransitionContainer = styled.div`
   opacity: 0;
