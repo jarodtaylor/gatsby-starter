@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import './transition-content.css';
 
-const TransitionContent = ({ transition, children }) => (
-  <div style={transition && transition.style}>
-    {children}
-  </div>
-);
+const TransitionContent = ({ transition, children }) => {
+  return (
+    <div className="transition-content" style={transition && transition.style}>
+      {children}
+    </div>
+  );
+};
 
 TransitionContent.propTypes = {
   transition: PropTypes.shape({
