@@ -19,7 +19,7 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators;
 
-  const blogPostTemplate = path.resolve('src/templates/article.jsx');
+  const blogPostTemplate = path.resolve('src/templates/post.jsx');
   const tagTemplate = path.resolve('src/pages/tag.jsx');
 
   return graphql(`{
@@ -72,7 +72,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       // Make tag pages
       tags.forEach((tag) => {
         createPage({
-          path: `/tags/${kebabCase(tag)}/`,
+          path: `/blog/tag/${kebabCase(tag)}/`,
           component: tagTemplate,
           context: {
             tag,

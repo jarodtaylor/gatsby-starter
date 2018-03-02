@@ -7,7 +7,7 @@ const TagsList = ({ list = [] }) => (
   <ul className="tag-list">
     {list.map(tag => (
       <li key={tag}>
-        <Link to={`/tags/${kebabCase(tag)}`}>
+        <Link to={`/blog/tag/${kebabCase(tag)}`}>
           {tag}
         </Link>
       </li>

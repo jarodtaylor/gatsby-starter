@@ -3,13 +3,9 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import TransitionContent from '../components/TransitionContent';
 import Tags from '../components/TagsList';
-/* eslint-disable */
 
-// import '../css/blog-post.css'; // make it pretty!
-export default function Template({
-  data, transition // this prop will be injected by the GraphQL query we'll write in a bit
-}) {
-  const { markdownRemark: post } = data; // data.markdownRemark holds our post data
+const Post = ({ data, transition }) => {
+  const { markdownRemark: post } = data;
   return (
     <TransitionContent {...{ transition }}>
       <Helmet title={`Your Blog Name - ${post.frontmatter.title}`} />
@@ -22,9 +18,9 @@ export default function Template({
       />
     </TransitionContent>
   );
-}
+};
 
-Template.propTypes = {
+Post.propTypes = {
   data: PropTypes.shape({
     markdownRemark: PropTypes.shape({
       frontmatter: PropTypes.shape({
@@ -36,7 +32,17 @@ Template.propTypes = {
       html: PropTypes.string,
     }),
   }).isRequired,
+  transition: PropTypes.shape({
+    status: PropTypes.string,
+    timeout: PropTypes.number,
+    style: PropTypes.shape({
+      opacity: PropTypes.number,
+    }),
+    nextPageResources: PropTypes.object,
+  }).isRequired,
 };
+
+export default Post;
 
 export const pageQuery = graphql`
   query BlogPostByPath($path: String!) {
