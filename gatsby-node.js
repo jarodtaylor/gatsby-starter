@@ -20,7 +20,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators;
 
   const blogPostTemplate = path.resolve('src/templates/post.jsx');
-  const tagTemplate = path.resolve('src/pages/tag.jsx');
+  const tagTemplate = path.resolve('src/templates/tag.jsx');
 
   return graphql(`{
     allMarkdownRemark(
