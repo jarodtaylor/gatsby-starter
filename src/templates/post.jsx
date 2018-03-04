@@ -25,11 +25,13 @@ Post.propTypes = {
     markdownRemark: PropTypes.shape({
       frontmatter: PropTypes.shape({
         date: PropTypes.string,
-        path: PropTypes.string,
         title: PropTypes.string,
         category: PropTypes.string,
       }),
       html: PropTypes.string,
+      fields: PropTypes.shape({
+        slug: PropTypes.string,
+      }),
     }),
   }).isRequired,
   transition: PropTypes.shape({
@@ -45,12 +47,14 @@ Post.propTypes = {
 export default Post;
 
 export const pageQuery = graphql`
-  query BlogPostByPath($path: String!) {
-    markdownRemark(frontmatter: { path: { eq: $path } }) {
+  query BlogPostQuery($slug: String!) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
       html
+      fields {
+        slug
+      }
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
-        path
         title
         tags
         category

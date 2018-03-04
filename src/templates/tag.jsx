@@ -28,7 +28,6 @@ TagPage.propTypes = {
       edges: PropTypes.arrayOf(PropTypes.shape({
         node: PropTypes.shape({
           frontmatter: PropTypes.shape({
-            path: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
           }),
         }),

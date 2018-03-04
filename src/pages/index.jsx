@@ -20,7 +20,6 @@ Index.propTypes = {
     markdownRemark: PropTypes.shape({
       frontmatter: PropTypes.shape({
         date: PropTypes.string,
-        path: PropTypes.string,
         title: PropTypes.string,
         category: PropTypes.string,
       }),

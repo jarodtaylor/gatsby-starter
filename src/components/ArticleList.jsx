@@ -9,7 +9,7 @@ const ArticleList = ({ posts }) => (
       .filter(post => post.node.frontmatter.title.length > 0)
       .map(({ node: post }) => (
         <article key={post.id}>
-          <h3><Link to={post.frontmatter.path}>{post.frontmatter.title}</Link></h3>
+          <h3><Link to={post.fields.slug}>{post.frontmatter.title}</Link></h3>
           <time dateTime={post.frontmatter.date}>{post.frontmatter.date}</time>
         </article>
       ))
@@ -22,7 +22,6 @@ ArticleList.propTypes = {
     excerpt: PropTypes.string,
     frontmatter: PropTypes.shape({
       date: PropTypes.string,
-      path: PropTypes.string,
       tags: PropTypes.arrayOf(PropTypes.string),
       title: PropTypes.string,
     }),
@@ -33,10 +32,12 @@ export const query = graphql`
   fragment ArticleListFragment on MarkdownRemark {
     excerpt(pruneLength: 250)
     id
+    fields {
+      slug
+    }
     frontmatter {
       title
       date(formatString: "MMMM DD, YYYY")
-      path
       tags
     }
   }
